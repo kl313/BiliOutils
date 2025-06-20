@@ -9,14 +9,14 @@
     "bou": "bin.js"
   },
   "scripts": {
-    "prebuild": "rm -rf dist/",
+    "prebuild": "rimraf dist/",
     "build": "npm run prebuild && babel --config-file ./babel.config.mjs ./src --out-dir ./dist --extensions \".ts\" && npm run postbuild",
-    "postbuild": "cp src/main.d.ts dist/main.d.ts && rm -rf dist/dto/ dist/types/ dist/__test__ && find dist -name \"*.dto.js\" -delete && find dist -name \"*.d.js\" -delete && cp LICENSE README.md package.json ./dist",
+    "postbuild": "copy src\\main.d.ts dist\\main.d.ts && rimraf dist/dto/ dist/types/ dist/__test__ && del /s /q dist\\*.dto.js && del /s /q dist\\*.d.js && copy LICENSE .\\dist && copy README.md .\\dist && copy package.json .\\dist",
     "build:baidu": "babel --config-file ./build/.baidu.babelrc.mjs ./src --out-dir ./dist --extensions \".ts\" && npm run postbuild:baidu",
     "postbuild:baidu": "npm run postbuild && sed -i '6a global.BILITOOLS_CONFIG = null;' dist/index.cfc.js && sed -i '1a global.IS_CFC = true;' dist/index.cfc.js",
     "build:rollup": "patch-package && rollup --bundleConfigAsCjs -c rollup.config.ts --configPlugin typescript && patch-package --reverse",
     "dev": "npm run tsx ./src/index.ts",
-    "dev:bin": "npm run tsx ./src/bin.ts --",
+    "dev:bin": "npm run tsx ./src/bin.ts -- -c ./config/config.single.json5",
     "start": "node -r dotenv/config ./dist/index.js",
     "autoclear": "node tools/pkgclean.js",
     "lint:eslint": "eslint --max-warnings 0  \"**/*.{js,ts}\" --fix",
@@ -83,6 +83,7 @@
     "rollup": "^3.26.0",
     "rollup-plugin-sizes": "^1.0.5",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.20.3",
     "typescript": "^5.1.6"
   },
   "dependencies": {

@@ -12,6 +12,7 @@ export const OriginURLs = {
 export const RefererURLs = {
   www: 'https://www.bilibili.com/',
   bigPoint: 'https://big.bilibili.com/mobile/bigPoint',
+  bigPointSign: 'https://big.bilibili.com/mobile/index',
   bigPointTask: 'https://big.bilibili.com/mobile/bigPoint/task',
   judge: 'https://www.bilibili.com/judgement/',
 };
@@ -44,11 +45,11 @@ interface UAOption {
 }
 
 export function getAndroidUA({
-  version = '7.72.0',
+  version = '8.45.1',
   phone = 'MI 10 Pro',
-  build = '7720210',
+  build = '8451100',
   channel = 'xiaomi',
-  osVer = '10',
+  osVer = '13',
   os = 'android',
 }: UAOption = {}) {
   return `Mozilla/5.0 BiliDroid/${version} (bbcallen@gmail.com) os/${os} model/${phone} mobi_app/${os} build/${build} channel/${channel} innerVer/${channel} osVer/${osVer} network/2`;

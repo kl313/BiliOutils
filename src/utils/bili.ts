@@ -49,12 +49,13 @@ function getAppSign(
   params = {
     platform: 'android',
     mobi_app: 'android',
-    device: 'android',
+    device: 'phone',
     disable_rcmd: 0,
-    channel: 'xiaomi',
+    channel: 'bili',
     c_locale: 'zh_CN',
     s_locale: 'zh_CN',
     ts: getUnixTime(),
+    statistics: `{"appId":1,"platform":3,"version":"8.45.1","abtest":""}`,
     ...TaskConfig.app.http,
     ...params,
   };

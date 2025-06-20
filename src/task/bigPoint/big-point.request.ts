@@ -16,15 +16,21 @@ const baseHeader = {
 
 /**
  * 大积分签到
+ * fixed api, post data and URL params
  */
 export function signIn() {
   return biliApi.post<Omit<PureDataProp, 'data'>>(
-    'pgc/activity/score/task/sign',
-    appSignString({
-      csrf: TaskConfig.BILIJCT,
-    }),
+    `pgc/activity/score/task/sign2?csrf=${TaskConfig.BILIJCT}`,
     {
-      headers: baseHeader,
+      t: Date.now(),
+      device: 'phone',
+      ts: getUnixTime(),
+    },
+    {
+      headers: {
+        ...baseHeader,
+        referer: RefererURLs.bigPointSign,
+      },
     },
   );
 }
@@ -74,10 +80,7 @@ export function complete(options: Record<string, string>) {
       ...options,
     }),
     {
-      headers: {
-        ...baseHeader,
-        referer: RefererURLs.bigPoint,
-      },
+      headers: baseHeader,
     },
   );
 }
@@ -158,10 +161,17 @@ export function showDispatch(eventId: string) {
 
 /**
  * 获取大积分任务列表
+ * add csrf, buvid, mobi_app, device, build params
  */
 export function getTaskCombine() {
-  return biliApi.get<TaskCombineDto>('x/vip_point/task/combine', {
-    headers: baseHeader,
+  return biliApi.get<TaskCombineDto>(`x/vip_point/task/combine?${appSignString({
+      csrf: TaskConfig.BILIJCT,
+      buvid: TaskConfig.buvid,
+    })}`, {
+    headers: {
+        ...baseHeader,
+        referer: RefererURLs.bigPointTask,
+      },
   });
 }
 
