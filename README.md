@@ -50,7 +50,7 @@ yarn lint:eslint
 开发环境模仿 npm 全局命令
 
 ```bash
-yarn dev:bin -c ./config/config.json
+yarn dev:bin
 ```
 
 编译
